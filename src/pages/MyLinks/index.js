@@ -5,7 +5,7 @@ import {Container, TitleMyLinks, ListLinks} from './styles'
 import Menu from '../../components/Menu'
 import ListItem from '../../components/ListItems'
 import {useIsFocused} from '@react-navigation/native';
-import {getLinkSaves} from '../../comands/storeLinks'
+import {deleteLink, getLinkSaves} from '../../comands/storeLinks'
 import ModalLink from '../../components/ModalLink'
 
 import StatusBarPage  from '../../components/StatusBarPage';
@@ -30,6 +30,10 @@ export default function MyLinks(){
         setData(item);
         setModalVisible(true);
     }
+    async function deleteItem(item) {
+      const result = await deleteLink('Meulink',item);
+      setLinks(result);
+    }
     return(
         <Container
         >
@@ -45,7 +49,7 @@ export default function MyLinks(){
             <ListLinks
                 data = {links}
                 keyExtractor = {(item)=> String(item.id)}
-                renderItem = {({item})=> <ListItem data = {item} selectItem = {handleItem}/>}
+                renderItem = {({item})=> <ListItem data = {item} selectItem = {handleItem} delItem = {deleteItem}/>}
                 contentContainerStyle = {{paddingBottom: 20}}
                 showsVerticalScrollIndicator = {false}
                 

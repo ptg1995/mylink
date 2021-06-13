@@ -5,10 +5,10 @@ import {ContainerLinks, TextLink, ActionRight} from './styles'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import styled from 'styled-components'
 
-export default function ListItem({data, selectItem}) {
+export default function ListItem({data, selectItem, delItem}) {
     function rightActions() {
         return(
-            <ActionRight>
+            <ActionRight onPress = {() =>{delItem(data)}}>
                 <Feather
                     name="trash"
                     color = "#FFF"
